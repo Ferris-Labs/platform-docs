@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: SERVICE NAME
+  labels:
+    app: APP NAME
+spec:
+  selector:
+    app: APP NAME
+  ports:
+    # When using multiple ports for a Service, you must give all of your ports names so that these are unambiguous
+    - name: PORT NAME 
+      port: SERVICE PORT
+      targetPort: PORT INSIDE CONTAINER
+      protcol: HTTP / TCP / UDP
+  type: ClusterIP

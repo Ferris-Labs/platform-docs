@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: INGRESS NAME
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.ferris.ai/oauth2/auth"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    
+    # Auth section ingress(reverse proxy) level
+    nginx.ingress.kubernetes.io/auth-signin: "https://auth.ferris.ai/oauth2/start?rd=https://$host$request_uri$is_args$args"
+    ingress.kubernetes.io/auth-send-body: "true"
+    ingress.kubernetes.io/auth-method: "POST"
+    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+
+spec:
+  rules:
+
+  - host: HOSTNAME.ferris.ai
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: SERVICE NAME
+          servicePort: SERVICE PORT
+  tls:
+    - hosts:
+      - HOSTNAME.ferris.ai

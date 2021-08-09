@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: DEPLOYMENT NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: APP NAME
+      part-of: ferris-apps
+  template:
+    metadata:
+      labels:
+        app: APP NAME
+        part-of: ferris-apps
+    spec:
+      containers:
+      - name: CONTAINER NAME
+        image: IMAGE
+        imagePullPolicy: "Always"
+        # Map all env variables from specified configmap 
+        envFrom:
+        - configMapRef:
+            name: CONFIGMAP NAME
+        # Map all env variables from specified secret 
+        - secretRef:
+            name: SECRET NAME
+        securityContext:
+          runAsUser: 10000
+        ports:
+          - containerPort: PORT INSIDE CONTAINER
