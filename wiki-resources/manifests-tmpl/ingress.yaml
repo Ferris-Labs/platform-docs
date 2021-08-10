@@ -4,15 +4,28 @@ metadata:
   name: INGRESS NAME
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/auth-url: "https://auth.ferris.ai/oauth2/auth"
+    # Alternatively uncomment the line below if you wish to route rour app over the public load balancer (prerequisite required - check wiki)
+    # kubernetes.io/ingress.class: "nginx-ext"
+    
+    # Set to false if you wish to disable ssl redirection
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     
-    # Auth section ingress(reverse proxy) level
+    # Auth section ingress(reverse proxy) level - comment if you wish to disable
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.ferris.ai/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://auth.ferris.ai/oauth2/start?rd=https://$host$request_uri$is_args$args"
     ingress.kubernetes.io/auth-send-body: "true"
     ingress.kubernetes.io/auth-method: "POST"
     nginx.ingress.kubernetes.io/auth-response-headers: "Authorization"
+    
+    # Some example options to control CORS
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    # nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    # nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+    # nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+    
+    # Control the maximum size of the clients request body - useful when your app deals with larger file uploads etc. 0 = unlimited
+    # nginx.ingress.kubernetes.io/proxy-body-size: "0"
+
 
 spec:
   rules:
@@ -24,6 +37,8 @@ spec:
         backend:
           serviceName: SERVICE NAME
           servicePort: SERVICE PORT
+          
+  # Comment out if you want to completly remove TLS for the specified host
   tls:
     - hosts:
       - HOSTNAME.ferris.ai
