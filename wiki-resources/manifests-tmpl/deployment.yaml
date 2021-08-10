@@ -25,6 +25,19 @@ spec:
         # Map all env variables from specified secret 
         - secretRef:
             name: SECRET NAME
+        ## Alternatively, map or re-map only specific variables 
+        #env:
+        #- name: NEW KEY1
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: CONFIGMAP NAME
+        #      key: KEY1
+        ## From secret
+        #- name: NEW SECRET KEY
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: SECRET NAME
+        #      key: SECRET KEY
         securityContext:
           runAsUser: 10000
         ports:
