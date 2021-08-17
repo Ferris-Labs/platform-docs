@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ferris-example
+  name: ferris-example-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
     # Alternatively uncomment the line below if you wish to route rour app over the public load balancer (prerequisite required - check wiki)
