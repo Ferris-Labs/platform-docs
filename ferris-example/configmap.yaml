@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ferris-example-config
+  labels:
+    app: ferris-example
+    part-of: ferris-apps
+data:
+  APP_NAME: ferris.example
+  CONSUL_HOST: consul.core
+  CONSUL_PORT: "8500"

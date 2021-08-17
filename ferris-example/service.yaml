@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ferris-example
+  labels:
+    app: ferris-example
+spec:
+  selector:
+    app: ferris-example
+  ports:
+    # When using multiple ports for a Service, you must give all of your ports names so that these are unambiguous
+    - name: http
+      port: 80
+      targetPort: 5000
+      protocol: TCP
+  type: ClusterIP

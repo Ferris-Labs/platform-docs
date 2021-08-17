@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ferris-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ferris-example
+      part-of: ferris-apps
+  template:
+    metadata:
+      labels:
+        app: ferris-example
+        part-of: ferris-apps
+    spec:
+      containers:
+      - name: ferris-example
+        image: eu.gcr.io/talent-test-drive/ferris-example:1.0
+        imagePullPolicy: "Always"
+        # Map all env variables from specified configmap 
+        envFrom:
+        - configMapRef:
+            name: ferris-example-config
+        # Map all env variables from specified secret 
+        #- secretRef:
+        #    name: SECRET NAME
+        ## Alternatively, map or re-map only specific variables 
+        #env:
+        #- name: NEW KEY1
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: CONFIGMAP NAME
+        #      key: KEY1
+        ## From secret
+        #- name: NEW SECRET KEY
+        #  valueFrom:
+        #    secretKeyRef:
+        #      name: SECRET NAME
+        #      key: SECRET KEY
+        securityContext:
+          runAsUser: 10000
+        ports:
+          - containerPort: 5000
