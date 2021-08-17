@@ -12,5 +12,6 @@ spec:
     - name: PORT NAME 
       port: SERVICE PORT
       targetPort: PORT INSIDE CONTAINER
-      protcol: HTTP / TCP / UDP
+      # Choose one - in most cases you will need TCP
+      protocol: TCP / UDP / SCTP 
   type: ClusterIP
