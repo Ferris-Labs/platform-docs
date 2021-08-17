@@ -6,5 +6,5 @@ metadata:
     app: APP NAME
     part-of: ferris-apps
 data:
-  KEY1: "string"
-  KEY2: int
+  KEY1: string
+  KEY2: "int"
