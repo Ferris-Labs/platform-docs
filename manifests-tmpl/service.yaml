@@ -8,13 +8,13 @@ spec:
   selector:
     app: APP NAME
   ports:
-    # When using multiple ports for a Service, you must give all of your ports names so that these are unambiguous
+  # When using multiple ports for a Service, you must give all of your ports names so that these are unambiguous
     - name: PORT NAME 
       port: SERVICE PORT
       targetPort: PORT INSIDE CONTAINER
       # Choose one - in most cases you will need TCP
       protocol: TCP / UDP / SCTP 
-    # Expose atnother port
+  # Expose atnother port
   # - name: ANOTHER NAME
   #   port: ANOTHER SERVICE PORT
   #   targetPort: ANOTHER PORT INSIDE CONTAINER
