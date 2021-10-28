@@ -14,4 +14,9 @@ spec:
       targetPort: PORT INSIDE CONTAINER
       # Choose one - in most cases you will need TCP
       protocol: TCP / UDP / SCTP 
+    # Expose atnother port
+  # - name: ANOTHER NAME
+  #   port: ANOTHER SERVICE PORT
+  #   targetPort: ANOTHER PORT INSIDE CONTAINER
+  #   protocol: TCP / UDP / SCTP 
   type: ClusterIP
